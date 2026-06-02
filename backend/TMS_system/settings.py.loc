@@ -99,8 +99,8 @@ DATABASES = {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'tms_db',          
         'USER': 'root',         
-        'PASSWORD': 'mysecretpassword', 
-        'HOST': 'db',               
+        'PASSWORD': '', 
+        'HOST': '127.0.0.1',               
         'PORT': '3306',                    
         'OPTIONS': {
             
@@ -160,8 +160,8 @@ LOGOUT_REDIRECT_URL = 'home'
 
 # --- Celery & Redis Configurations ---
 # When running locally, Redis defaults to localhost. Inside Docker, we will pass 'redis'.
-CELERY_BROKER_URL = os.environ.get('CELERY_BROKER_URL', 'redis://redis:6379/0')
-CELERY_RESULT_BACKEND = os.environ.get('CELERY_RESULT_BACKEND', 'redis://redis:6379/0')
+CELERY_BROKER_URL = os.environ.get('CELERY_BROKER_URL', 'redis://127.0.0.1:6379/0')
+CELERY_RESULT_BACKEND = os.environ.get('CELERY_RESULT_BACKEND', 'redis://127.0.0.1:6379/0')
 
 # Optimize worker configurations for heavy workloads (1M tasks)
 CELERY_ACCEPT_CONTENT = ['json']

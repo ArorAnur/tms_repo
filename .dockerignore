@@ -1,0 +1,10 @@
+
+# Ignore venv folders anywhere in the project
+**/venv/
+
+# Ignore common Python/System artifacts
+__pycache__/
+*.pyc
+*.db
+.git/
+.env

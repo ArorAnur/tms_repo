@@ -30,6 +30,7 @@ from TMS_system.views.user_views import RegisterUserView
 from TMS_system.views.task_views import MyEligibleTasksView
 from TMS_system.views.task_views import RecomputeEligibilityView
 from TMS_system.views.task_views import MarkTaskCompletedView
+from TMS_system.views.task_views import ViewTaskDetailView
 
 
 
@@ -45,4 +46,5 @@ urlpatterns = [
     path('my-eligible-tasks/', MyEligibleTasksView.as_view(), name='my-eligible-tasks'),
     path('tasks/<int:task_id>/recompute-eligibility/', RecomputeEligibilityView.as_view(), name='recompute-eligibility'),
     path('tasks/<int:task_id>/mark-completed/', MarkTaskCompletedView.as_view(), name='mark-task-completed'),
+    path('tasks/<int:task_id>/', ViewTaskDetailView.as_view(), name='view-task-detail'),
 ]

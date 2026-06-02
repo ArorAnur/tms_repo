@@ -3,8 +3,8 @@ from django.contrib.auth.models import User
 
 class UserProfile(models.Model):
     # Links directly to Django's built-in User model
-    user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='profile')
-    
+    user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='profile', db_index=True)
+
     # Static attributes for the assignment engine
     department = models.CharField(max_length=100, blank=True, null=True)
     experience_years = models.IntegerField(default=0)

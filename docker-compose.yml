@@ -1,0 +1,47 @@
+version: '3.8'
+
+services:
+  # The Database
+  db:
+    image: mysql:8.0
+    restart: always
+    environment:
+      MYSQL_DATABASE: tms_db
+      MYSQL_ROOT_PASSWORD: mysecretpassword
+    ports:
+      - "3306:3306"
+
+  # The Redis Broker
+  redis:
+    image: redis:7-alpine
+
+  # The Django Web App
+  web:
+    build: 
+      context: ./backend
+    command: python manage.py runserver 0.0.0.0:8000
+    volumes:
+      - ./backend:/app
+    ports:
+      - "8000:8000"
+    environment:
+      - DATABASE_URL=mysql://root:mysecretpassword@db:3306/tms_db
+      - REDIS_URL=redis://redis:6379/0
+    depends_on:
+      - db
+      - redis
+
+  # The Celery Worker
+  worker:
+    build:
+      context: ./backend
+      # Ensure worker starts only after dependencies are ready
+    command: celery -A TMS_system worker --loglevel=info
+    volumes:
+      - ./backend:/app
+    environment:
+      - DATABASE_URL=mysql://root:mysecretpassword@db:3306/tms_db
+      - REDIS_URL=redis://redis:6379/0
+    depends_on:
+      - db
+      - redis

@@ -1,0 +1,64 @@
+# Task Management System (TMS)
+
+A robust, scalable Task Management System featuring an asynchronous backend ecosystem worker pool, optimized database indexing, and an atomic caching layer designed to handle high-throughput read/write operations.
+
+---
+
+## 🏗️ System Architecture Overview
+
+This project is split into two decoupled layers to isolate concerns and optimize performance:
+* **Backend Ecosystem (Containerized via Docker):** Consists of a Django REST Framework API, a MySQL primary transactional database, and a shared Redis instance serving dual roles as an application cache (configured with `volatile-lru` eviction) and a message broker for Celery background tasks.
+* **Frontend Client (Native Host):** A modern single-page application executed natively via Node.js to ensure lightning-fast Hot Module Replacement (HMR) during development.
+
+---
+
+## 📋 Prerequisites
+
+Before running the application, ensure you have the following installed on your host machine:
+* [Docker & Docker Compose](https://docs.docker.com/get-docker/)
+* [Node.js (v18+) & npm](https://nodejs.org/)
+
+---
+
+## ⚙️ Backend Infrastructure Setup
+
+The backend relies on three core configuration files (`Dockerfile`, `docker-compose.yml`, and `.dockerignore`) to orchestrate the environment. Database performance optimizations and initial seed data are managed atomically within the Django migration lifecycle.
+
+1. **Navigate to the backend directory:**
+   ```bash
+   cd backend
+
+
+2. **Build and launch the container infrastructure:*
+This command pulls the required images, configures isolated networks, attaches volumes for data persistence, and starts the services:
+docker-compose up --build
+
+3.**Apply database migrations & populate seed data**
+```bash
+docker-compose exec web python manage.py migrate
+
+
+## 💻 Frontend Setup
+
+The client application runs natively on your host machine to avoid container filesystem synchronization overhead, optimizing the frontend developer experience.
+
+1.**Navigate to the frontend directory:**
+```bash
+cd tms-frontend
+
+2.**Install project dependencies:**
+npm install
+
+3.**Launch the local development server:**
+npm run dev
+
+
+
+##Frontend Endpoint: http://localhost:5173
+
+
+##Seed Data
+ **Admin access**
+	username:admin password: admin123
+	users: (alice,bob,charlie...judy) password: password123
+        You may do a read query on the database for user_profile information. All users are employees spread across different departments (e.g. HR, Operations, Design) with varyingrange of experience. Please refer to migration 009 inside backend migrations for more details

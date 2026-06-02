@@ -104,7 +104,9 @@ class MyEligibleTasksView(APIView):
     def get(self, request):
         # 1. Fetch tasks assigned directly to the calling user
         # This performs an indexed lookup on the foreign key column in MySQL
-        queryset = Task.objects.filter(assignee=request.user).order_by('-created_at')
+        queryset = Task.objects.select_related('assignee__profile') \
+                               .filter(assignee=request.user) \
+                               .order_by('-created_at')
 
         # 2. Apply standard DRF Pagination to preserve server memory bounds
         paginator = LimitOffsetPagination()
@@ -154,3 +156,20 @@ class RecomputeEligibilityView(APIView):
             
         except ValueError as e:
             return Response({"error": str(e)}, status=status.HTTP_400_BAD_REQUEST)
+        
+
+class ViewTaskDetailView(APIView):
+    """
+    API view to retrieve detailed information about a specific task.
+    Accessible to authenticated users with appropriate scope.
+    """
+    permission_classes = [IsAuthenticated, HasRequiredScope]
+    required_scope = 'write'
+
+    def get(self, request, task_id):
+        try:
+            task = Task.objects.select_related('assignee__profile').get(task_id=task_id)
+            serializer = TaskDetailSerializer(task)
+            return Response(serializer.data, status=status.HTTP_200_OK)
+        except Task.DoesNotExist:
+            return Response({"error": "Task not found."}, status=status.HTTP_404_NOT_FOUND)

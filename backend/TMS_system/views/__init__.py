@@ -6,6 +6,7 @@ from .user_views import RegisterUserView
 from .task_views import MyEligibleTasksView
 from .task_views import RecomputeEligibilityView
 from .task_views import MarkTaskCompletedView
+from .task_views import ViewTaskDetailView
 
 __all__ = [
     'MyTokenObtainPairView',
@@ -15,4 +16,5 @@ __all__ = [
     'MyEligibleTasksView',
     'RecomputeEligibilityView',
     'MarkTaskCompletedView',
+    'ViewTaskDetailView',
 ]

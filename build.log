@@ -1,0 +1,160 @@
+#0 building with "desktop-linux" instance using docker driver
+
+#1 [internal] load build definition from Dockerfile
+#1 transferring dockerfile: 910B done
+#1 WARN: LegacyKeyValueFormat: "ENV key=value" should be used instead of legacy "ENV key value" format (line 5)
+#1 WARN: LegacyKeyValueFormat: "ENV key=value" should be used instead of legacy "ENV key value" format (line 6)
+#1 DONE 0.0s
+
+#2 [internal] load metadata for docker.io/library/python:3.11-slim
+#2 DONE 0.0s
+
+#3 [internal] load .dockerignore
+#3 transferring context: 2B done
+#3 DONE 0.0s
+
+#4 [1/6] FROM docker.io/library/python:3.11-slim@sha256:a3ab0b966bc4e91546a033e22093cb840908979487a9fc0e6e38295747e49ac0
+#4 resolve docker.io/library/python:3.11-slim@sha256:a3ab0b966bc4e91546a033e22093cb840908979487a9fc0e6e38295747e49ac0 done
+#4 DONE 0.0s
+
+#5 [internal] load build context
+#5 transferring context: 3.15kB done
+#5 DONE 0.0s
+
+#6 [2/6] WORKDIR /app
+#6 CACHED
+
+#7 [3/6] RUN apt-get update && apt-get install -y --no-install-recommends     build-essential     default-libmysqlclient-dev     pkg-config     && rm -rf /var/lib/apt/lists/*
+#7 CACHED
+
+#8 [4/6] COPY requirements.txt .
+#8 DONE 0.0s
+
+#9 [5/6] RUN python -m pip install --no-cache-dir --upgrade pip &&     python -m pip install --no-cache-dir -r requirements.txt
+#9 0.634 Requirement already satisfied: pip in /usr/local/lib/python3.11/site-packages (24.0)
+#9 4.719 Collecting pip
+#9 4.776   Downloading pip-26.1.2-py3-none-any.whl.metadata (4.6 kB)
+#9 4.790 Downloading pip-26.1.2-py3-none-any.whl (1.8 MB)
+#9 5.182    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 1.8/1.8 MB 4.7 MB/s eta 0:00:00
+#9 5.219 Installing collected packages: pip
+#9 5.219   Attempting uninstall: pip
+#9 5.220     Found existing installation: pip 24.0
+#9 5.234     Uninstalling pip-24.0:
+#9 5.281       Successfully uninstalled pip-24.0
+#9 5.589 Successfully installed pip-26.1.2
+#9 5.589 WARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager. It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv
+#9 6.088 Collecting amqp==5.3.1 (from -r requirements.txt (line 1))
+#9 8.166   Downloading amqp-5.3.1-py3-none-any.whl.metadata (8.9 kB)
+#9 8.511 Collecting asgiref==3.11.1 (from -r requirements.txt (line 2))
+#9 8.540   Downloading asgiref-3.11.1-py3-none-any.whl.metadata (9.3 kB)
+#9 8.653 Collecting billiard==4.2.4 (from -r requirements.txt (line 3))
+#9 8.709   Downloading billiard-4.2.4-py3-none-any.whl.metadata (4.8 kB)
+#9 8.795 Collecting celery==5.6.3 (from -r requirements.txt (line 4))
+#9 8.810   Downloading celery-5.6.3-py3-none-any.whl.metadata (23 kB)
+#9 11.19 Collecting click==8.1.8 (from -r requirements.txt (line 5))
+#9 11.97   Downloading click-8.1.8-py3-none-any.whl.metadata (2.3 kB)
+#9 12.30 Collecting click-didyoumean==0.3.1 (from -r requirements.txt (line 6))
+#9 12.32   Downloading click_didyoumean-0.3.1-py3-none-any.whl.metadata (3.9 kB)
+#9 14.74 Collecting click-plugins==1.1.1.2 (from -r requirements.txt (line 7))
+#9 14.75   Downloading click_plugins-1.1.1.2-py2.py3-none-any.whl.metadata (6.5 kB)
+#9 18.24 Collecting click-repl==0.3.0 (from -r requirements.txt (line 8))
+#9 18.25   Downloading click_repl-0.3.0-py3-none-any.whl.metadata (3.6 kB)
+#9 18.60 Collecting Django==4.2.30 (from -r requirements.txt (line 9))
+#9 18.67   Downloading django-4.2.30-py3-none-any.whl.metadata (4.2 kB)
+#9 19.37 Collecting django-cors-headers==4.9.0 (from -r requirements.txt (line 10))
+#9 19.40   Downloading django_cors_headers-4.9.0-py3-none-any.whl.metadata (16 kB)
+#9 23.52 Collecting djangorestframework==3.16.1 (from -r requirements.txt (line 11))
+#9 23.54   Downloading djangorestframework-3.16.1-py3-none-any.whl.metadata (11 kB)
+#9 23.61 Collecting djangorestframework_simplejwt==5.5.1 (from -r requirements.txt (line 12))
+#9 23.64   Downloading djangorestframework_simplejwt-5.5.1-py3-none-any.whl.metadata (4.6 kB)
+#9 23.98 Collecting exceptiongroup==1.3.1 (from -r requirements.txt (line 13))
+#9 24.01   Downloading exceptiongroup-1.3.1-py3-none-any.whl.metadata (6.7 kB)
+#9 24.10 Collecting kombu==5.6.2 (from -r requirements.txt (line 14))
+#9 24.13   Downloading kombu-5.6.2-py3-none-any.whl.metadata (3.5 kB)
+#9 24.17 Collecting mysqlclient==2.1.1 (from -r requirements.txt (line 15))
+#9 24.19   Downloading mysqlclient-2.1.1.tar.gz (88 kB)
+#9 28.48   Installing build dependencies: started
+#9 29.21   Installing build dependencies: finished with status 'done'
+#9 29.21   Getting requirements to build wheel: started
+#9 29.47   Getting requirements to build wheel: finished with status 'done'
+#9 29.47   Preparing metadata (pyproject.toml): started
+#9 29.73   Preparing metadata (pyproject.toml): finished with status 'done'
+#9 29.75 Collecting packaging==26.2 (from -r requirements.txt (line 16))
+#9 29.77   Downloading packaging-26.2-py3-none-any.whl.metadata (3.5 kB)
+#9 30.13 Collecting prompt_toolkit==3.0.52 (from -r requirements.txt (line 17))
+#9 30.16   Downloading prompt_toolkit-3.0.52-py3-none-any.whl.metadata (6.4 kB)
+#9 30.23 Collecting PyJWT==2.13.0 (from -r requirements.txt (line 18))
+#9 30.25   Downloading pyjwt-2.13.0-py3-none-any.whl.metadata (3.4 kB)
+#9 30.54 Collecting python-dateutil==2.9.0.post0 (from -r requirements.txt (line 19))
+#9 30.56   Downloading python_dateutil-2.9.0.post0-py2.py3-none-any.whl.metadata (8.4 kB)
+#9 30.65 Collecting sqlparse==0.5.5 (from -r requirements.txt (line 20))
+#9 30.66   Downloading sqlparse-0.5.5-py3-none-any.whl.metadata (4.7 kB)
+#9 31.45 Collecting typing_extensions==4.15.0 (from -r requirements.txt (line 21))
+#9 31.47   Downloading typing_extensions-4.15.0-py3-none-any.whl.metadata (3.3 kB)
+#9 31.52 Collecting tzdata==2026.2 (from -r requirements.txt (line 22))
+#9 31.53   Downloading tzdata-2026.2-py2.py3-none-any.whl.metadata (1.4 kB)
+#9 31.86 Collecting tzlocal==5.3.1 (from -r requirements.txt (line 23))
+#9 31.87   Downloading tzlocal-5.3.1-py3-none-any.whl.metadata (7.6 kB)
+#9 31.95 Collecting vine==5.1.0 (from -r requirements.txt (line 24))
+#9 31.96   Downloading vine-5.1.0-py3-none-any.whl.metadata (2.7 kB)
+#9 32.00 Collecting wcwidth==0.7.0 (from -r requirements.txt (line 25))
+#9 32.01   Downloading wcwidth-0.7.0-py3-none-any.whl.metadata (36 kB)
+#9 32.94 Collecting six>=1.5 (from python-dateutil==2.9.0.post0->-r requirements.txt (line 19))
+#9 32.95   Downloading six-1.17.0-py2.py3-none-any.whl.metadata (1.7 kB)
+#9 33.63 Downloading amqp-5.3.1-py3-none-any.whl (50 kB)
+#9 36.98 Downloading vine-5.1.0-py3-none-any.whl (9.6 kB)
+#9 37.28 Downloading asgiref-3.11.1-py3-none-any.whl (24 kB)
+#9 37.70 Downloading billiard-4.2.4-py3-none-any.whl (87 kB)
+#9 45.10 Downloading celery-5.6.3-py3-none-any.whl (451 kB)
+#9 45.35 Downloading click-8.1.8-py3-none-any.whl (98 kB)
+#9 45.40 Downloading click_didyoumean-0.3.1-py3-none-any.whl (3.6 kB)
+#9 45.41 Downloading click_plugins-1.1.1.2-py2.py3-none-any.whl (11 kB)
+#9 45.43 Downloading click_repl-0.3.0-py3-none-any.whl (10 kB)
+#9 45.44 Downloading django-4.2.30-py3-none-any.whl (8.0 MB)
+#9 47.16    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 8.0/8.0 MB 4.7 MB/s  0:00:01
+#9 47.18 Downloading django_cors_headers-4.9.0-py3-none-any.whl (12 kB)
+#9 47.19 Downloading djangorestframework-3.16.1-py3-none-any.whl (1.1 MB)
+#9 47.47    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 1.1/1.1 MB 4.1 MB/s  0:00:00
+#9 47.48 Downloading djangorestframework_simplejwt-5.5.1-py3-none-any.whl (107 kB)
+#9 47.52 Downloading exceptiongroup-1.3.1-py3-none-any.whl (16 kB)
+#9 47.53 Downloading kombu-5.6.2-py3-none-any.whl (214 kB)
+#9 47.58 Downloading packaging-26.2-py3-none-any.whl (100 kB)
+#9 47.61 Downloading prompt_toolkit-3.0.52-py3-none-any.whl (391 kB)
+#9 47.69 Downloading pyjwt-2.13.0-py3-none-any.whl (31 kB)
+#9 47.71 Downloading python_dateutil-2.9.0.post0-py2.py3-none-any.whl (229 kB)
+#9 47.76 Downloading sqlparse-0.5.5-py3-none-any.whl (46 kB)
+#9 47.78 Downloading typing_extensions-4.15.0-py3-none-any.whl (44 kB)
+#9 47.80 Downloading tzdata-2026.2-py2.py3-none-any.whl (349 kB)
+#9 47.86 Downloading tzlocal-5.3.1-py3-none-any.whl (18 kB)
+#9 47.88 Downloading wcwidth-0.7.0-py3-none-any.whl (110 kB)
+#9 47.91 Downloading six-1.17.0-py2.py3-none-any.whl (11 kB)
+#9 47.95 Building wheels for collected packages: mysqlclient
+#9 47.95   Building wheel for mysqlclient (pyproject.toml): started
+#9 48.58   Building wheel for mysqlclient (pyproject.toml): finished with status 'done'
+#9 48.58   Created wheel for mysqlclient: filename=mysqlclient-2.1.1-cp311-cp311-linux_aarch64.whl size=116740 sha256=5ea0d376ebd21be43660bb0422a444caa14b72d6b7f90515d665241b2ba62cf9
+#9 48.58   Stored in directory: /tmp/pip-ephem-wheel-cache-2omzxa3h/wheels/19/44/b2/cdf313664c12c8b11f88afd90079823c63369ab9135fc79185
+#9 48.58 Successfully built mysqlclient
+#9 48.61 Installing collected packages: wcwidth, vine, tzlocal, tzdata, typing_extensions, sqlparse, six, PyJWT, packaging, mysqlclient, click, billiard, asgiref, python-dateutil, prompt_toolkit, exceptiongroup, Django, click-plugins, click-didyoumean, amqp, kombu, djangorestframework, django-cors-headers, click-repl, djangorestframework_simplejwt, celery
+#9 49.72 
+#9 49.72 Successfully installed Django-4.2.30 PyJWT-2.13.0 amqp-5.3.1 asgiref-3.11.1 billiard-4.2.4 celery-5.6.3 click-8.1.8 click-didyoumean-0.3.1 click-plugins-1.1.1.2 click-repl-0.3.0 django-cors-headers-4.9.0 djangorestframework-3.16.1 djangorestframework_simplejwt-5.5.1 exceptiongroup-1.3.1 kombu-5.6.2 mysqlclient-2.1.1 packaging-26.2 prompt_toolkit-3.0.52 python-dateutil-2.9.0.post0 six-1.17.0 sqlparse-0.5.5 typing_extensions-4.15.0 tzdata-2026.2 tzlocal-5.3.1 vine-5.1.0 wcwidth-0.7.0
+#9 49.72 WARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager, possibly rendering your system unusable. It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv. Use the --root-user-action option if you know what you are doing and want to suppress this warning.
+#9 DONE 49.8s
+
+#10 [6/6] COPY . .
+#10 DONE 0.0s
+
+#11 exporting to image
+#11 exporting layers
+#11 exporting layers 5.6s done
+#11 exporting manifest sha256:41362917c546294d90e2a70c44263ded668d7960dbd526f32d2c4a033f2b33eb done
+#11 exporting config sha256:abe2317119d0b31532bf0b2b7a62ded0063a2a8e2a3445afcc57222a89c668eb done
+#11 exporting attestation manifest sha256:5921a9f10df92dfc33a44962c6956d36c2e22f857f95fdd3da019b4ca770aa5b done
+#11 exporting manifest list sha256:a79fc6abc1879ac9404c7552ca107b7b540f8dd06e91d73df3eb225c722cac22 done
+#11 naming to docker.io/library/tms-backend:latest done
+#11 unpacking to docker.io/library/tms-backend:latest
+#11 unpacking to docker.io/library/tms-backend:latest 1.5s done
+#11 DONE 7.1s
+
+ [33m2 warnings found (use docker --debug to expand):
+[0m - LegacyKeyValueFormat: "ENV key=value" should be used instead of legacy "ENV key value" format (line 5)
+ - LegacyKeyValueFormat: "ENV key=value" should be used instead of legacy "ENV key value" format (line 6)

@@ -17,7 +17,8 @@ class Task(models.Model):
         on_delete=models.SET_NULL, 
         null=True, 
         blank=True,
-        related_name='tasks'
+        related_name='tasks',
+        db_index=True
     )
     
     completion_date = models.DateTimeField(null=True, blank=True)

@@ -8,6 +8,12 @@ export const getMyAssignedTasks = async (limit = 10, offset = 0) => {
   return response.data; // Return the parsed body payload natively
 };
 
+
+export const getTasksById = async (taskId) => {
+  const response = await api.get(`/tasks/${taskId}/`);
+  return response.data; // Return the parsed body payload natively
+};
+
 /**
  * Submit an administrative payload to re-evaluate structural matching workflows.
  */

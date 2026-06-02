@@ -2,7 +2,7 @@
 from rest_framework import serializers
 from django.contrib.auth.models import User
 from ..models import Task # Note the double dot (..) to go up out of serializers/
-
+from .user_profile_serializers import UserSerializer
 class TaskCreateSerializer(serializers.Serializer):
     task_id = serializers.IntegerField(read_only=True)
     title = serializers.CharField(max_length=255, required=True)
@@ -22,6 +22,7 @@ class TaskCreateSerializer(serializers.Serializer):
 
 
 class TaskDetailSerializer(serializers.ModelSerializer):
+    assignee = UserSerializer(read_only=True)
     class Meta:
         model = Task
         fields = [
@@ -31,12 +32,15 @@ class TaskDetailSerializer(serializers.ModelSerializer):
             'status', 
             'completion_date', 
             'assignment_rules', 
-            'created_at'
+            'created_at',
+            'assignee',
         ]
         read_only_fields = fields
 
 class MarkTaskCompletedSerializer(serializers.Serializer):
-    task_id = serializers.IntegerField(required=True)        
+    task_id = serializers.IntegerField(required=True)   
+
+     
 
 
 class RecomputeEligibilitySerializer(serializers.Serializer):

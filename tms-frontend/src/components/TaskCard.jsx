@@ -23,6 +23,9 @@ export default function TaskCard({ task, markCompletedHandler }) {
       <p style={{ margin: '8px 0 0 0', color: '#555', fontSize: '14px', lineHeight: '1.4' }}>
         {task.description}
     </p>
+    <p style={{ margin: '8px 0 0 0', color: '#555', fontSize: '14px', lineHeight: '1.4' }}>
+      Assignee: {task.assignee_id || 'Unassigned'}
+    </p>
     </div>
   );
 }
