@@ -1,64 +1,86 @@
-# Task Management System (TMS)
+## Backend Setup
 
-A robust, scalable Task Management System featuring an asynchronous backend ecosystem worker pool, optimized database indexing, and an atomic caching layer designed to handle high-throughput read/write operations.
+The backend relies on three core configuration files (Dockerfile, docker-compose.yml, and
+.dockerignore) to orchestrate the environment. Database performance optimizations and initial
+seed data are managed atomically within the Django migration lifecycle.
 
----
+  1. Navigate to the backend directory:
 
-## 🏗️ System Architecture Overview
+       cd backend
 
-This project is split into two decoupled layers to isolate concerns and optimize performance:
-* **Backend Ecosystem (Containerized via Docker):** Consists of a Django REST Framework API, a MySQL primary transactional database, and a shared Redis instance serving dual roles as an application cache (configured with `volatile-lru` eviction) and a message broker for Celery background tasks.
-* **Frontend Client (Native Host):** A modern single-page application executed natively via Node.js to ensure lightning-fast Hot Module Replacement (HMR) during development.
+  2. Build and launch the container infrastructure:
 
----
+     This command pulls the required images, configures isolated networks, attaches volumes for
+     data persistence, and starts the services:
 
-## 📋 Prerequisites
+       docker-compose up --build
 
-Before running the application, ensure you have the following installed on your host machine:
-* [Docker & Docker Compose](https://docs.docker.com/get-docker/)
-* [Node.js (v18+) & npm](https://nodejs.org/)
+  3. Apply database migrations and populate seed data:
 
----
+       docker-compose exec web python manage.py migrate
 
-## ⚙️ Backend Infrastructure Setup
+--------------------------------------------------------------------------------
 
-The backend relies on three core configuration files (`Dockerfile`, `docker-compose.yml`, and `.dockerignore`) to orchestrate the environment. Database performance optimizations and initial seed data are managed atomically within the Django migration lifecycle.
+## Frontend Setup
 
-1. **Navigate to the backend directory:**
-   ```bash
-   cd backend
+The client application runs natively on your host machine to avoid container filesystem
+synchronization overhead, optimizing the frontend developer experience.
 
+  1. Navigate to the frontend directory:
 
-2. **Build and launch the container infrastructure:*
-This command pulls the required images, configures isolated networks, attaches volumes for data persistence, and starts the services:
-docker-compose up --build
+       cd tms-frontend
 
-3.**Apply database migrations & populate seed data**
-```bash
-docker-compose exec web python manage.py migrate
+  2. Install project dependencies:
 
+       npm install
 
-## 💻 Frontend Setup
+  3. Launch the local development server:
 
-The client application runs natively on your host machine to avoid container filesystem synchronization overhead, optimizing the frontend developer experience.
+       npm run dev
 
-1.**Navigate to the frontend directory:**
-```bash
-cd tms-frontend
-
-2.**Install project dependencies:**
-npm install
-
-3.**Launch the local development server:**
-npm run dev
-
-
-
+Frontend Endpoint: http://localhost:5173
 ##Frontend Endpoint: http://localhost:5173
 
+## Seed Data
 
-##Seed Data
- **Admin access**
-	username:admin password: admin123
-	users: (alice,bob,charlie...judy) password: password123
-        You may do a read query on the database for user_profile information. All users are employees spread across different departments (e.g. HR, Operations, Design) with varyingrange of experience. Please refer to migration 009 inside backend migrations for more details
+Admin Access
+  Username: admin
+  Password: admin123
+
+User Accounts
+  Users alice through judy are pre-populated with password password123. All users are employees
+  spread across departments (e.g. HR, Operations, Design) with a varying range of experience.
+  Refer to migration 009 inside backend migrations for the full schema and seed details. You may
+  also run a direct read query on the database to inspect user_profile information.
+
+--------------------------------------------------------------------------------
+
+## Using the TMS Dashboard
+
+User Scope
+  As a user, you can view only the tasks assigned to you and mark them as completed. Assigned
+  tasks are visible immediately on login. 10 users are pre-populated via seed migration.
+
+Admin Scope
+
+  1. View an Existing Task
+     Look up any task by its task_id.
+
+  2. Create a Task
+     Select the task creation option and provide a task title along with an assignment eligibility
+     criteria. Three fields are currently supported, with the application designed to accommodate
+     new criteria with minimal changes. The three supported operators, specified verbatim, are
+     EQUALS, GREATER_THAN_OR_EQUAL, and LESS_THAN. Example criteria:
+
+     [
+       {"field": "department", "operator": "EQUALS", "value": "Engineering"},
+       {"field": "experience_years", "operator": "GREATER_THAN_OR_EQUAL", "value": 3},
+       {"field": "active_tasks_count", "operator": "LESS_THAN", "value": 5}
+     ]
+
+     Once created, a task_id will be generated and displayed in a dialog. Save this ID as it is
+     required for future reassignments.
+
+  3. Reassign an Existing Task
+     Provide a task_id and updated eligibility criteria. The interface mirrors task creation.
+     Reassignment is not supported for tasks that are already marked completed.
